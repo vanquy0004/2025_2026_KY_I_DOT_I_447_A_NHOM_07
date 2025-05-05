@@ -23,39 +23,79 @@
 						</a>
 					</li>
 				</router-link>
-				<router-link to="/admin/phim">
-					<li class="nav-item">
-						<a class="nav-link" href="/admin/phim">
-							<div class="parent-icon">
-								<i class="fa-solid fa-film"></i>
-
-							</div>
-							<div class="menu-title">Phim</div>
-						</a>
-					</li>
-				</router-link>
-				<router-link to="/admin/the-loai-phim">
-					<li class="nav-item">
-						<a class="nav-link" href="/admin/the-loai-phim">
-							<div class="parent-icon">
-								<i class="bx bx-category"></i>
-
-							</div>
-							<div class="menu-title">Thể Loại Phim</div>
-						</a>
-					</li>
-				</router-link>
-				<router-link to="/admin/phong-chieu">
-					<li class="nav-item">
-						<a class="nav-link" href="/admin/phong-chieu">
-							<div class="parent-icon">
-								<i class="fa-solid fa-person-shelter"></i>
-
-							</div>
-							<div class="menu-title">Phòng Chiếu</div>
-						</a>
-					</li>
-				</router-link>
+				<li class="nav-item dropdown">
+					<a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret show"
+						data-bs-toggle="dropdown" aria-expanded="true">
+						<div class="parent-icon"><i class="fa-solid fa-user-group"></i>
+						</div>
+						<div class="menu-title">Quản lý tài khoản</div>
+					</a>
+					<ul class="dropdown-menu show" data-bs-popper="static">
+						<router-link to="/admin/nhan-vien">
+							<li>
+								<a class="dropdown-item" href="/admin/nhan-vien"><i
+										class="bx bx-right-arrow-alt"></i>Tài Khoản Nhân
+									viên</a>
+							</li>
+						</router-link>
+						<router-link to="/admin/khach-hang">
+							<li>
+								<a class="dropdown-item" href="/admin/khach-hang"><i
+										class="bx bx-right-arrow-alt"></i>Tài khoản Khách
+									hàng</a>
+							</li>
+						</router-link>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret show"
+						data-bs-toggle="dropdown" aria-expanded="true">
+						<div class="parent-icon"><i class="fa-solid fa-film"></i>
+						</div>
+						<div class="menu-title">Quản lý phim</div>
+					</a>
+					<ul class="dropdown-menu show" data-bs-popper="static">
+						<router-link to="/admin/the-loai-phim">
+							<li>
+								<a class="dropdown-item" href="/admin/the-loai-phim"><i
+										class="bx bx-right-arrow-alt"></i>Thể loại phim</a>
+							</li>
+						</router-link>
+						<router-link to="/admin/phim">
+							<li>
+								<a class="dropdown-item" href="/admin/phim"><i
+										class="bx bx-right-arrow-alt"></i>Phim</a>
+							</li>
+						</router-link>
+						<router-link to="/admin/suat-chieu">
+							<li>
+								<a class="dropdown-item" href="/admin/suat-chieu"><i
+										class="bx bx-right-arrow-alt"></i>Suất chiếu</a>
+							</li>
+						</router-link>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret show"
+						data-bs-toggle="dropdown" aria-expanded="true">
+						<div class="parent-icon"><i class="fa-solid fa-person-shelter"></i>
+						</div>
+						<div class="menu-title">Quản lý phòng chiếu</div>
+					</a>
+					<ul class="dropdown-menu show" data-bs-popper="static">
+						<router-link to="/admin/phong-chieu">
+							<li>
+								<a class="dropdown-item" href="/admin/phong-chieu"><i
+										class="bx bx-right-arrow-alt"></i>Phòng chiếu</a>
+							</li>
+						</router-link>
+						<router-link to="/admin/ghe">
+							<li>
+								<a class="dropdown-item" href="/admin/ghe"><i class="bx bx-right-arrow-alt"></i>Ghế</a>
+							</li>
+						</router-link>
+					</ul>
+				</li>
 				<router-link to="/admin/dich-vu">
 					<li class="nav-item">
 						<a class="nav-link" href="/admin/dich-vu">
@@ -72,29 +112,8 @@
 						<a class="nav-link" href="/admin/	voucher">
 							<div class="parent-icon">
 								<i class="fa-solid fa-ticket"></i>
-
 							</div>
 							<div class="menu-title">Voucher</div>
-						</a>
-					</li>
-				</router-link>
-				<router-link to="/admin/nhan-vien">
-					<li class="nav-item">
-						<a class="nav-link" href="/admin/nhan-vien">
-							<div class="parent-icon">
-								<i class="fa-solid fa-user"></i>
-							</div>
-							<div class="menu-title">Nhân Viên</div>
-						</a>
-					</li>
-				</router-link>
-				<router-link to="/admin/khach-hang">
-					<li class="nav-item">
-						<a class="nav-link" href="/admin/khach-hang">
-							<div class="parent-icon">
-								<i class="fa-solid fa-user-group"></i>
-							</div>
-							<div class="menu-title">Khách Hàng</div>
 						</a>
 					</li>
 				</router-link>
@@ -115,26 +134,6 @@
 								<i class="fa-solid fa-ticket"></i>
 							</div>
 							<div class="menu-title">Vé</div>
-						</a>
-					</li>
-				</router-link>
-				<router-link to="/admin/suat-chieu">
-					<li class="nav-item">
-						<a class="nav-link" href="/admin/suat-chieu">
-							<div class="parent-icon">
-								<i class="fa-solid fa-calendar-days"></i>
-							</div>
-							<div class="menu-title">Suất Chiếu</div>
-						</a>
-					</li>
-					</router-link>
-				<router-link to="/admin/ghe">
-					<li class="nav-item">
-						<a class="nav-link" href="/admin/ghe">
-							<div class="parent-icon">
-								<i class="fa-solid fa-chair"></i>
-							</div>
-							<div class="menu-title">Ghế</div>
 						</a>
 					</li>
 				</router-link>

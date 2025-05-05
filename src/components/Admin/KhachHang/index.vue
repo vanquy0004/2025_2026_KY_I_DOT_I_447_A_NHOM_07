@@ -146,7 +146,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Cập Nhật Thông Tin Nhân Viên</h5>
+                    <h5 class="modal-title">Cập Nhật Thông Tin Khách Hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -206,12 +206,12 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Xóa Nhân Viên</h5>
+                    <h5 class="modal-title">Xóa Khách Hàng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-danger" role="alert">
-                        Bạn có chắc chắn muốn xóa nhân viên
+                        Bạn có chắc chắn muốn xóa khách hàng
                         <strong>Nguyễn Văn A</strong>?
                     </div>
                 </div>

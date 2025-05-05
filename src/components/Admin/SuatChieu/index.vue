@@ -43,8 +43,9 @@
                                     <td class="align-middle text-center">{{ item.ngay_chieu }}</td>
                                     <td class="align-middle text-center">{{ item.thoi_gian_bat_dau }}</td>
                                     <td class="align-middle text-center">{{ item.thoi_gian_ket_thuc }}</td>
-                                    <td class="align-middle text-center">
-                                        <button v-if="item.tinh_trang == 1" class="btn btn-success w-100" style="color: white;">
+                                    <td v-on:click="doiTrangThaiSuatChieu(item)" class="align-middle text-center">
+                                        <button v-if="item.tinh_trang == 1" class="btn btn-success w-100"
+                                            style="color: white;">
                                             Hoạt Động
                                         </button>
                                         <button v-else class="btn btn-danger w-100" style="color: white;">
@@ -83,13 +84,16 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Phim</label>
                             <select class="form-select" v-model="create_suat_chieu.id_phim">
-                                <option v-for="phim in list_phim" :key="phim.id" :value="phim.id">{{ phim.ten_phim }}</option>
+                                <option v-for="phim in list_phim" :key="phim.id" :value="phim.id">{{ phim.ten_phim }}
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Phòng Chiếu</label>
-                            <select class="form-select" v-model="create_suat_chieu.id_phong">
-                                <option v-for="phong in list_phong" :key="phong.id" :value="phong.id">{{ phong.ten_phong }}</option>
+                            <select class="form-select" v-model="create_suat_chieu.id_phong_chieu">
+                                <option v-for="phong in list_phong" :key="phong.id" :value="phong.id">{{ phong.ten_phong
+                                    }}
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -138,13 +142,16 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Phim</label>
                             <select class="form-select" v-model="edit_suat_chieu.id_phim">
-                                <option v-for="phim in list_phim" :key="phim.id" :value="phim.id">{{ phim.ten_phim }}</option>
+                                <option v-for="phim in list_phim" :key="phim.id" :value="phim.id">{{ phim.ten_phim }}
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Phòng Chiếu</label>
-                            <select class="form-select" v-model="edit_suat_chieu.id_phong">
-                                <option v-for="phong in list_phong" :key="phong.id" :value="phong.id">{{ phong.ten_phong }}</option>
+                            <select class="form-select" v-model="edit_suat_chieu.id_phong_chieu">
+                                <option v-for="phong in list_phong" :key="phong.id" :value="phong.id">{{ phong.ten_phong
+                                    }}
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -172,7 +179,8 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Đóng
                     </button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="capNhatSuatChieu()">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        v-on:click="capNhatSuatChieu()">
                         Cập nhật
                     </button>
                 </div>
@@ -191,7 +199,8 @@
                 <div class="modal-body">
                     <div class="alert alert-danger" role="alert">
                         Bạn có chắc chắn muốn xóa suất chiếu phim
-                        <strong>{{ del_suat_chieu.ten_phim }}</strong> vào ngày <strong>{{ del_suat_chieu.ngay_chieu }}</strong>?
+                        <strong>{{ del_suat_chieu.ten_phim }}</strong> vào ngày <strong>{{ del_suat_chieu.ngay_chieu
+                            }}</strong>?
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -217,7 +226,7 @@ export default {
             list_phong: [],
             create_suat_chieu: {
                 id_phim: '',
-                id_phong: '',
+                id_phong_chieu: '',
                 ngay_chieu: '',
                 thoi_gian_bat_dau: '',
                 thoi_gian_ket_thuc: '',
@@ -227,7 +236,7 @@ export default {
             edit_suat_chieu: {
                 id: '',
                 id_phim: '',
-                id_phong: '',
+                id_phong_chieu: '',
                 ngay_chieu: '',
                 thoi_gian_bat_dau: '',
                 thoi_gian_ket_thuc: '',
@@ -266,13 +275,13 @@ export default {
         },
         themSuatChieu() {
             axios
-                .post('http://127.0.0.1:8000/api/admin/suat-chieu/create', this.create_suat_chieu)
+                .post('http://127.0.0.1:8000/api/admin/suat-chieu/add-data', this.create_suat_chieu)
                 .then(response => {
                     if (response.data.status) {
                         this.layDataSuatChieu();
                         this.create_suat_chieu = {
                             id_phim: '',
-                            id_phong: '',
+                            id_phong_chieu: '',
                             ngay_chieu: '',
                             thoi_gian_bat_dau: '',
                             thoi_gian_ket_thuc: '',
@@ -308,7 +317,20 @@ export default {
                         alert(response.data.message);
                     }
                 })
+        },
+        doiTrangThaiSuatChieu(item) {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/suat-chieu/change-status', item)
+                .then(response => {
+                    if (response.data.status) {
+                        this.layDataSuatChieu();
+                        alert(response.data.message);
+                    } else {
+                        alert(response.data.message);
+                    }
+                })
         }
+
     },
 };
 </script>
