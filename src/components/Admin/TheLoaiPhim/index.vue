@@ -2,9 +2,10 @@
     <div class="row">
         <div class="col-lg-4">
             <div class="card radius-10 border-top border-0 border-3 border-info">
+                <div class="card-header">
+                    <h5 class="card-title mb-1 mt-1">Thêm Thể Loại Phim</h5>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Thêm Thể Loại Phim</h5>
-                    <hr>
                     <label class="mb-1">Tên thể loại</label>
                     <input v-model="create_the_loai_phim.ten_the_loai" type="text" class="form-control"
                         placeholder="Nhập tên thể loại">
@@ -18,18 +19,22 @@
                         <option value="1">Hiển thị</option>
                         <option value="0">Tạm tắt</option>
                     </select>
-
                     <div class="mt-3 d-flex justify-content-end">
-                        <button type="button" class="btn btn-primary" @click="themTheLoaiPhim">Lưu</button>
+                        <button type="button" class="btn btn-primary" @click="themTheLoaiPhim()">Thêm Mới</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-8">
             <div class="card radius-10 border-top border-0 border-3 border-info">
+                <div class="card-header">
+                    <h5 class="card-title mb-1 mt-1">Danh Sách Thể Loại Phim</h5>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Danh Sách Thể Loại Phim</h5>
-                    <hr>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search....">
+                        <button class="btn btn-success input-group-text" style="width: 100px;">Tìm kiếm</button>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                             <thead class="text-center align-middle">
@@ -46,7 +51,7 @@
                                     <td class="align-middle text-center ">{{ index + 1 }}</td>
                                     <td class="align-middle ">{{ item.ten_the_loai }}</td>
                                     <td class="align-middle ">{{ item.slug_the_loai }}</td>
-                                    <td @click="doiTrangThai(item)" class="text-center align-middle">
+                                    <td  class="text-center align-middle" style="width: 130px;">
                                         <button v-if="item.tinh_trang == 1" class="btn btn-success" type="button">
                                             <i class="fa-solid fa-square-check"></i>
                                             Hiển thị
@@ -56,17 +61,15 @@
                                             Tạm Tắt
                                         </button>
                                     </td>
-                                    <td class="text-nowrap align-middle text-center">
-                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                    <td class="text-nowrap align-middle text-center" style="width: 150px;">
+                                        <button type="button" class="btn btn-info text-light " data-bs-toggle="modal"
                                             data-bs-target="#capNhatModal"
                                             v-on:click="Object.assign(edit_the_loai_phim, item)">Cập Nhật</button>
-                                        <button type="button" class="ms-2 btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        <button type="button" class="ms-2 btn btn-danger" data-bs-toggle="modal"
                                             data-bs-target="#xoaModal"
                                             v-on:click="Object.assign(del_the_loai_phim, item)">Xóa</button>
                                     </td>
-
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -197,17 +200,6 @@ export default {
                     }
                 });
         },
-        doiTrangThai(item) {
-            axios.post('http://localhost:8000/api/admin/the-loai-phim/change-status', item)
-                .then((res) => {
-                    if (res.data.status) {
-                        alert(res.data.message);
-                        this.getTheLoaiPhim();
-                    } else {
-                        alert('Cập nhật trạng thái thể loại phim thất bại');
-                    }
-                });
-        }
 
     }
 } 

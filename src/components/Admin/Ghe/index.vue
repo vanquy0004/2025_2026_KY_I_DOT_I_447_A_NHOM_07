@@ -3,94 +3,87 @@
         <div class="col-lg-4">
             <div class="card radius-10 border-top border-0 border-3 border-info">
                 <div class="card-header">
-                    <h4 class="mt-2"><b>THÊM GHẾ MỚI</b></h4>
+                    <h4 class="my-1">THÊM GHẾ MỚI</h4>
                 </div>
                 <div class="card-body">
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label">Tên Ghế</label>
-                        <input type="text" class="form-control" v-model="create_ghe.ten_ghe" />
+                    <div class="col-md-12 mb-2">
+                        <label>Tên Ghế</label>
+                        <input type="text" class="form-control mt-1" v-model="create_ghe.ten_ghe"
+                            placeholder="Nhập tên ghế" />
                     </div>
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label">Phòng Chiếu</label>
-                        <select class="form-select" v-model="create_ghe.id_phong">
+                    <div class="col-md-12 mb-2">
+                        <label>Phòng Chiếu</label>
+                        <select class="form-select mt-1" v-model="create_ghe.id_phong">
                             <option value="">Chọn Phòng Chiếu</option>
-                            <option v-for="phong in list_phong" :key="phong.id" :value="phong.id">{{ phong.ten_phong
-                            }}</option>
+                            <template v-for="(value, index) in list_phong" :key="index">
+                                <option :value="value.id">{{ value.ten_phong }}</option>
+                            </template>
                         </select>
                     </div>
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label">Tình Trạng</label>
-                        <select class="form-select" v-model="create_ghe.tinh_trang">
+                    <div class="col-md-12 mb-2">
+                        <label>Tình Trạng</label>
+                        <select class="form-select mt-1" v-model="create_ghe.tinh_trang">
                             <option value="1">Hoạt Động</option>
                             <option value="0">Không Hoạt Động</option>
                         </select>
                     </div>
                 </div>
                 <div class="card-footer text-end">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                        Thêm ghế
-                    </button>
+                    <button class="btn btn-primary" v-on:click="themGhe()">Thêm ghế</button>
                 </div>
             </div>
         </div>
         <div class="col-lg-8">
             <div class="card radius-10 border-top border-0 border-3 border-info">
                 <div class="card-header d-flex justify-content-between">
-                    <h4 class="mt-2"><b>DANH SÁCH GHẾ</b></h4>
-
-                </div>
-                <div class="row mb-2 mt-2">
-                    <div class="col-lg-12">
-                        <div class="position-relative search-bar-box input-group" style="width: 100%;">
-                            <input type="text" class="form-control search-control" placeholder="Tìm Kiếm?">
-                            <span class="position-absolute top-50 search-show translate-middle-y"><i
-                                    class='bx bx-search'></i></span>
-                            <span class="position-absolute top-50 search-close translate-middle-y"><i
-                                    class='bx bx-x'></i></span>
-                            <button class="btn btn-primary">Tìm Kiếm</button>
-                        </div>
-                    </div>
+                    <h4 class="my-1">DANH SÁCH GHẾ</h4>
                 </div>
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr class="bg-primary text-light text-nowrap">
-                                <th class="text-center">#</th>
-                                <th class="text-center">Tên Ghế</th>
-                                <th class="text-center">Phòng Chiếu</th>
-                                <th class="text-center">Tình Trạng</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template v-for="(item, index) in list_ghe" :key="index">
-                                <tr class="text-nowrap">
-                                    <th class="align-middle text-center">{{ index + 1 }}</th>
-                                    <td class="align-middle text-center">{{ item.ten_ghe }}</td>
-                                    <td class="align-middle">{{ item.ten_phong }}</td>
-                                    <td class="align-middle text-center">
-                                        <button v-if="item.tinh_trang == 1" class="btn btn-success w-100"
-                                            style="color: white;">
-                                            Hoạt Động
-                                        </button>
-                                        <button v-else class="btn btn-danger w-100" style="color: white;">
-                                            Không Hoạt Động
-                                        </button>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <button class="btn btn-success me-2" data-bs-toggle="modal"
-                                            data-bs-target="#updateModal" @click="edit_ghe = item">
-                                            Cập nhật
-                                        </button>
-                                        <button class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal" @click="del_ghe = item">
-                                            Xóa
-                                        </button>
-                                    </td>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search....">
+                        <button class="btn btn-success input-group-text" style="width: 100px;">Tìm kiếm</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="bg-primary text-light text-nowrap">
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Tên Ghế</th>
+                                    <th class="text-center">Phòng Chiếu</th>
+                                    <th class="text-center">Tình Trạng</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
-                            </template>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <template v-for="(item, index) in list_ghe" :key="index">
+                                    <tr class="text-nowrap">
+                                        <th class="align-middle text-center" style="width: 30px;">{{ index + 1 }}</th>
+                                        <td class="align-middle text-center">{{ item.ten_ghe }}</td>
+                                        <td class="align-middle">{{ item.ten_phong }}</td>
+                                        <td class="align-middle text-center" style="width: 150px;">
+                                            <button v-if="item.tinh_trang == 1" class="btn btn-success w-100"
+                                                style="color: white;">
+                                                Hoạt Động
+                                            </button>
+                                            <button v-else class="btn btn-danger w-100" style="color: white;">
+                                                Không Hoạt Động
+                                            </button>
+                                        </td>
+                                        <td class="align-middle text-center" style="width: 150px;">
+                                            <button class="btn btn-info text-light me-2" data-bs-toggle="modal"
+                                                data-bs-target="#updateModal" @click="edit_ghe = item">
+                                                Cập nhật
+                                            </button>
+                                            <button class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal" @click="del_ghe = item">
+                                                Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -121,40 +114,40 @@
 
     <!-- Modal Cập Nhật -->
     <div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Cập Nhật Thông Tin Ghế</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Tên Ghế</label>
-                            <input type="text" class="form-control" v-model="edit_ghe.ten_ghe" />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Phòng Chiếu</label>
-                            <select class="form-select" v-model="edit_ghe.id_phong">
-                                <option v-for="phong in list_phong" :key="phong.id" :value="phong.id">{{ phong.ten_phong
-                                }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Tình Trạng</label>
-                            <select class="form-select" v-model="edit_ghe.tinh_trang">
-                                <option value="1">Hoạt Động</option>
-                                <option value="0">Không Hoạt Động</option>
-                            </select>
-                        </div>
+                    <div class="col-md-12 mb-2">
+                        <label>Tên Ghế</label>
+                        <input type="text" class="form-control mt-1" v-model="create_ghe.ten_ghe"
+                            placeholder="Nhập tên ghế" />
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <label>Phòng Chiếu</label>
+                        <select class="form-select mt-1" v-model="create_ghe.id_phong">
+                            <option value="">Chọn Phòng Chiếu</option>
+                            <template v-for="(value, index) in list_phong" :key="index">
+                                <option :value="value.id">{{ value.ten_phong }}</option>
+                            </template>
+                        </select>
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <label>Tình Trạng</label>
+                        <select class="form-select mt-1" v-model="create_ghe.tinh_trang">
+                            <option value="1">Hoạt Động</option>
+                            <option value="0">Không Hoạt Động</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Đóng
                     </button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="capNhatGhe()">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="capNhatGhe()">
                         Cập nhật
                     </button>
                 </div>

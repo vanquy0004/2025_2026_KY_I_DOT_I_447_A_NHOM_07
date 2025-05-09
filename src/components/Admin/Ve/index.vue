@@ -8,19 +8,11 @@
                         Thêm vé
                     </button>
                 </div>
-                <div class="row mb-2 mt-2">
-                    <div class="col-lg-12">
-                        <div class="position-relative search-bar-box input-group" style="width: 100%;">
-                            <input type="text" class="form-control search-control" placeholder="Tìm Kiếm?">
-                            <span class="position-absolute top-50 search-show translate-middle-y"><i
-                                    class='bx bx-search'></i></span>
-                            <span class="position-absolute top-50 search-close translate-middle-y"><i
-                                    class='bx bx-x'></i></span>
-                            <button class="btn btn-primary">Tìm Kiếm</button>
-                        </div>
-                    </div>
-                </div>
                 <div class="card-body table-responsive">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search....">
+                        <button class="btn btn-success input-group-text" style="width: 90px;">Tìm kiếm</button>
+                    </div>
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr class="bg-primary text-light text-nowrap">
@@ -42,7 +34,8 @@
                                     <td class="align-middle text-center">{{ item.ma_ve }}</td>
                                     <td class="align-middle">{{ item.ho_va_ten }}</td>
                                     <td class="align-middle">{{ item.ten_phim }}</td>
-                                    <td class="align-middle text-center">{{ item.ngay_chieu }} - {{ item.thoi_gian_bat_dau }}</td>
+                                    <td class="align-middle text-center">{{ item.ngay_chieu }} - {{
+                                        item.thoi_gian_bat_dau }}</td>
                                     <td class="align-middle text-center">{{ item.ten_ghe }}</td>
                                     <td class="align-middle text-center">{{ item.ngay_chieu }}</td>
                                     <td class="align-middle text-center">
@@ -59,7 +52,7 @@
                                         </button>
                                     </td>
                                     <td class="align-middle text-center">
-                                        <button class="btn btn-success me-2" data-bs-toggle="modal"
+                                        <button class="btn btn-info text-light me-2" data-bs-toggle="modal"
                                             data-bs-target="#updateModal" @click="edit_ve = item">
                                             Cập nhật
                                         </button>
@@ -90,7 +83,8 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Khách Hàng</label>
                             <select class="form-select" v-model="create_ve.id_khach_hang">
-                                <option v-for="khach in list_khach_hang" :key="khach.id" :value="khach.id">{{ khach.ho_va_ten }}</option>
+                                <option v-for="khach in list_khach_hang" :key="khach.id" :value="khach.id">{{
+                                    khach.ho_va_ten }}</option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -142,7 +136,8 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Khách Hàng</label>
                             <select class="form-select" v-model="edit_ve.id_khach_hang">
-                                <option v-for="khach in list_khach_hang" :key="khach.id" :value="khach.id">{{ khach.ho_va_ten }}</option>
+                                <option v-for="khach in list_khach_hang" :key="khach.id" :value="khach.id">{{
+                                    khach.ho_va_ten }}</option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -156,7 +151,8 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Ghế</label>
                             <select class="form-select" v-model="edit_ve.id_ghe">
-                                <option v-for="ghe in list_ghe_edit" :key="ghe.id" :value="ghe.id">{{ ghe.ten_ghe }}</option>
+                                <option v-for="ghe in list_ghe_edit" :key="ghe.id" :value="ghe.id">{{ ghe.ten_ghe }}
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">

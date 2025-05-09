@@ -2,32 +2,49 @@
     <div class="row">
         <div class="col-lg-4">
             <div class="card radius-10 border-top border-0 border-3 border-info">
+                <div class="card-header">
+                    <h4 class="card-title my-1">THÊM DỊCH VỤ</h4>
+                </div>
                 <div class="card-body">
-                    <h5>Dịch Vụ</h5>
-                    <hr />
-                    <label>Tên dịch vụ</label>
-                    <input v-model="create_dich_vu.ten_dich_vu" class="form-control" type="text" />
-                    <label class="mt-2">Giá dịch vụ</label>
-                    <input v-model="create_dich_vu.gia" class="form-control" type="text" />
-                    <label class="mt-2">Mô tả dịch vụ</label>
-                    <textarea v-model="create_dich_vu.mo_ta" class="form-control" rows="3"></textarea>
-                    <label class="mt-2">Tình trạng</label>
-                    <select v-model="create_dich_vu.tinh_trang" class="form-select" aria-label="Default select example">
-                        <option selected>Chọn tình trạng</option>
-                        <option value="1">Hiển thị</option>
-                        <option value="0">Tạm tắt</option>
-                    </select>
+                    <div class="mb-2">
+                        <label class="mb-1">Tên dịch vụ</label>
+                        <input v-model="create_dich_vu.ten_dich_vu" class="form-control" type="text"
+                            placeholder="Nhập tên dịch vụ" />
+                    </div>
+                    <div class="mb-2">
+                        <label class="mb-1">Giá dịch vụ</label>
+                        <input v-model="create_dich_vu.gia" class="form-control" type="text"
+                            placeholder="Nhập giá dịch vụ" />
+                    </div>
+                    <div class="mb-2">
+                        <label class="mb-1">Mô tả dịch vụ</label>
+                        <textarea v-model="create_dich_vu.mo_ta" class="form-control" rows="3"
+                            placeholder="Nhập mô tả dịch vụ"></textarea>
+                    </div>
+                    <div class="mb-2">
+                        <label class="mb-1">Tình trạng</label>
+                        <select v-model="create_dich_vu.tinh_trang" class="form-select"
+                            aria-label="Default select example">
+                            <option value="1">Hiển thị</option>
+                            <option value="0">Tạm tắt</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary" @click="themDichVu">Lưu</button>
+                    <button type="button" class="btn btn-primary" @click="themDichVu()">Thêm Mới</button>
                 </div>
             </div>
         </div>
         <div class="col-lg-8">
             <div class="card radius-10 border-top border-0 border-3 border-info">
+                <div class="card-header">
+                    <h4 class="card-title my-1">DANH SÁCH DỊCH VỤ</h4>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Danh Sách Dịch Vụ</h5>
-                    <hr />
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search....">
+                        <button class="btn btn-success input-group-text" style="width: 140px;">Tìm kiếm</button>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                             <thead class="text-center align-middle">
@@ -43,31 +60,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(item, index) in list_dich_vu" :key="index">
-                                    <td class="align-middle text-center">{{ index + 1 }}</td>
-                                    <td class="align-middle">{{ item.ten_dich_vu }}</td>
-                                    <td class="align-middle ">{{ item.gia }}</td>
-                                    <td class="align-middle ">{{ item.mo_ta }}</td>
-                                    <td v-on:click="doiTrangThaiDichVu(item)" class="text-center align-middle">
-                                        <button v-if="item.tinh_trang == 1" class="btn btn-success" type="button">
-                                            <i class="fa-solid fa-square-check"></i> Hiển thị
-                                        </button>
-                                        <button v-else class="btn btn-warning" type="button">
-                                            <i class="fa-solid fa-square-xmark"></i> Tạm tắt
-                                        </button>
-                                    </td>
-                                    <td class="text-nowrap align-middle text-center">
-                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#capNhatModal"
-                                            v-on:click="Object.assign(edit_dich_vu, item)">
-                                            Cập Nhật
-                                        </button>
-                                        <button type="button" class="ms-2 btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#xoaModal" v-on:click="Object.assign(del_dich_vu, item)">
-                                            Xóa
-                                        </button>
-                                    </td>
-                                </tr>
+                                <template v-for="(item, index) in list_dich_vu" :key="index">
+                                    <tr>
+                                        <td class="align-middle text-center">{{ index + 1 }}</td>
+                                        <td class="align-middle">{{ item.ten_dich_vu }}</td>
+                                        <td class="align-middle ">{{ item.gia }}</td>
+                                        <td class="align-middle ">{{ item.mo_ta }}</td>
+                                        <td class="text-center align-middle" style="width: 150px;">
+                                            <button v-if="item.tinh_trang == 1" class="btn btn-success" type="button">
+                                                <i class="fa-solid fa-square-check"></i> Hiển thị
+                                            </button>
+                                            <button v-else class="btn btn-warning" type="button">
+                                                <i class="fa-solid fa-square-xmark"></i> Tạm tắt
+                                            </button>
+                                        </td>
+                                        <td class="text-nowrap align-middle text-center" style="width: 150px;">
+                                            <button type="button" class="btn btn-info text-light" data-bs-toggle="modal"
+                                                data-bs-target="#capNhatModal"
+                                                v-on:click="Object.assign(edit_dich_vu, item)">
+                                                Cập Nhật
+                                            </button>
+                                            <button type="button" class="ms-2 btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#xoaModal"
+                                                v-on:click="Object.assign(del_dich_vu, item)">
+                                                Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
                             </tbody>
                         </table>
                     </div>
@@ -100,7 +120,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                     <button v-on:click="capNhatDichVu()" type="button" class="btn btn-primary"
-                        data-bs-dismiss="modal">Cập nhật</button>
+                        data-bs-dismiss="modal">Cập
+                        nhật</button>
                 </div>
             </div>
         </div>
@@ -185,7 +206,7 @@ export default {
                         alert(res.data.message);
                         this.getListDichVu();
                     } else {
-                        alert('Thêm dịch vụ thất bại');
+                        alert('Cập nhật dịch vụ thất bại');
                     }
                 });
         },
@@ -196,21 +217,11 @@ export default {
                         alert(res.data.message);
                         this.getListDichVu();
                     } else {
-                        alert('Thêm dịch vụ thất bại');
+                        alert('Xóa dịch vụ thất bại');
                     }
                 });
         },
-        doiTrangThaiDichVu(item) {
-            axios.post('http://localhost:8000/api/admin/dich-vu/change-status', item)
-                .then((res) => {
-                    if (res.data.status) {
-                        alert(res.data.message);
-                        this.getListDichVu();
-                    } else {
-                        alert('Thêm dịch vụ thất bại');
-                    }
-                });
-        }
+        
     },
 };
 </script>

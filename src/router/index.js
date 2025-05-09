@@ -52,7 +52,7 @@ const routes = [
     {
       path: '/admin/ghe',
       component: () => import('../components/Admin/Ghe/index.vue')
-    }
+    },
    
 ]
 

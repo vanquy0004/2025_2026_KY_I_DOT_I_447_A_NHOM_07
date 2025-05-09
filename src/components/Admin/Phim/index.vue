@@ -8,79 +8,73 @@
                         Thêm phim
                     </button>
                 </div>
-                <div class="row mb-2 mt-2">
-                    <div class="col-lg-12">
-                        <div class="position-relative search-bar-box input-group" style="width: 100%;">
-                            <input type="text" class="form-control search-control" placeholder="Tìm Kiếm?">
-                            <span class="position-absolute top-50 search-show translate-middle-y"><i
-                                    class='bx bx-search'></i></span>
-                            <span class="position-absolute top-50 search-close translate-middle-y"><i
-                                    class='bx bx-x'></i></span>
-                            <button class="btn btn-primary">Tìm Kiếm</button>
-                        </div>
-                    </div>
-                </div>
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr class="bg-primary text-light text-nowrap">
-                                <th class="text-center">#</th>
-                                <th class="text-center">Tên Phim</th>
-                                <th class="text-center">Hình Ảnh</th>
-                                <th class="text-center">Đạo Diễn</th>
-                                <th class="text-center">Ngày Phát Hành</th>
-                                <th class="text-center">Thể Loại</th>
-                                <th class="text-center">Trạng Thái</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template v-for="(item, index) in list_phim" :key="index">
-                                <tr class="text-nowrap">
-                                    <th class="align-middle text-center">{{ index + 1 }}</th>
-                                    <td class="align-middle">{{ item.ten_phim }}</td>
-                                    <td class="align-middle">
-                                        <img :src="item.hinh_anh" alt="Hình Ảnh" style="width: 100px; height: 100px;">
-                                    </td>
-                                    <td class="align-middle">{{ item.dao_dien }}</td>
-                                    <td class="align-middle text-center">{{ item.ngay_phat_hanh }}</td>
-                                    <td class="align-middle text-center">{{ item.ten_the_loai }}</td>
-                                    <td class="align-middle text-center">
-                                        <!-- Ví dụ: 1 = Sắp chiếu, 2 = Đang chiếu, 0 = Ngừng chiếu -->
-                                        <button v-if="item.tinh_trang == 0" class="btn btn-danger w-100"
-                                            style="color: white;">
-                                            Ngừng Chiếu
-                                        </button>
-                                        <button v-if="item.tinh_trang == 1" class="btn btn-warning w-100"
-                                            style="color: white;">
-                                            Sắp Chiếu
-                                        </button>
-                                        <button v-if="item.tinh_trang == 2" class="btn btn-success w-100"
-                                            style="color: white;">
-                                            Đang Chiếu
-                                        </button>
-
-                                    </td>
-
-                                    <td class="align-middle text-center">
-                                        <button class="btn btn-info me-2"
-                                            @click="Object.assign(obj_phim_chi_tiet, item)" style="color: white;"
-                                            data-bs-toggle="modal" data-bs-target="#chiTietModal">
-                                            Chi Tiết
-                                        </button>
-                                        <button class="btn btn-success me-2" data-bs-toggle="modal"
-                                            data-bs-target="#updateModal">
-                                            Cập nhật
-                                        </button>
-                                        <button class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal">
-                                            Xóa
-                                        </button>
-                                    </td>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search....">
+                        <button class="btn btn-success input-group-text" style="width: 110px;">Tìm kiếm</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="bg-primary text-light text-nowrap">
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Tên Phim</th>
+                                    <th class="text-center">Hình Ảnh</th>
+                                    <th class="text-center">Đạo Diễn</th>
+                                    <th class="text-center">Ngày Phát Hành</th>
+                                    <th class="text-center">Thể Loại</th>
+                                    <th class="text-center">Trạng Thái</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
-                            </template>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <template v-for="(item, index) in list_phim" :key="index">
+                                    <tr class="text-nowrap">
+                                        <th class="align-middle text-center">{{ index + 1 }}</th>
+                                        <td class="align-middle">{{ item.ten_phim }}</td>
+                                        <td class="align-middle">
+                                            <img :src="item.hinh_anh" alt="Hình Ảnh"
+                                                style="width: 100px; height: 100px;">
+                                        </td>
+                                        <td class="align-middle">{{ item.dao_dien }}</td>
+                                        <td class="align-middle text-center">{{ item.ngay_phat_hanh }}</td>
+                                        <td class="align-middle text-center">{{ item.ten_the_loai }}</td>
+                                        <td class="align-middle text-center" style="width: 140px;">
+                                            <!-- Ví dụ: 1 = Sắp chiếu, 2 = Đang chiếu, 0 = Ngừng chiếu -->
+                                            <button v-if="item.tinh_trang == 0" class="btn btn-danger w-100"
+                                                style="color: white;">
+                                                Ngừng Chiếu
+                                            </button>
+                                            <button v-if="item.tinh_trang == 1" class="btn btn-warning w-100"
+                                                style="color: white;">
+                                                Sắp Chiếu
+                                            </button>
+                                            <button v-if="item.tinh_trang == 2" class="btn btn-success w-100"
+                                                style="color: white;">
+                                                Đang Chiếu
+                                            </button>
+
+                                        </td>
+                                        <td class="align-middle text-center" style="width: 200px;">
+                                            <button class="btn btn-secondary me-2"
+                                                @click="Object.assign(obj_phim_chi_tiet, item)" style="color: white;"
+                                                data-bs-toggle="modal" data-bs-target="#chiTietModal">
+                                                Chi Tiết
+                                            </button>
+                                            <button class="btn btn-info text-light me-2" data-bs-toggle="modal"
+                                                data-bs-target="#updateModal" v-on:click="Object.assign(edit_phim, item)">
+                                                Cập nhật
+                                            </button>
+                                            <button class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal" v-on:click="Object.assign(del_phim, item)">
+                                                Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -98,39 +92,39 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Tên Phim</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="create_phim.ten_phim" type="text" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Hình Ảnh</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="create_phim.hinh_anh" type="text" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Đạo Diễn</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="create_phim.dao_dien" type="text" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Diễn Viên</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="create_phim.dien_vien" type="text" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Ngày Phát Hành</label>
-                            <input type="date" class="form-control" />
+                            <input v-model="create_phim.ngay_phat_hanh" type="date" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Thể Loại</label>
-                            <select class="form-control">
-                                <option value="1">Hành Động</option>
-                                <option value="2">Viễn Tưởng</option>
-                                <option value="3">Tình Cảm</option>
+                            <select v-model="create_phim.id_the_loai" class="form-control">
+                                <template v-for="(item, index) in list_the_loai_phim" :key="index">
+                                    <option v-if="item.tinh_trang==1" :value="item.id">{{ item.ten_the_loai }}</option>
+                                </template>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Thời Lượng</label>
-                            <input type="number" class="form-control" />
+                            <input v-model="create_phim.thoi_luong" type="number" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Trạng Thái</label>
-                            <select class="form-control">
+                            <select v-model="create_phim.tinh_trang" class="form-control">
                                 <option value="0">Ngừng Chiếu</option>
                                 <option value="1">Sắp Chiếu</option>
                                 <option value="2">Đang Chiếu</option>
@@ -138,7 +132,7 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Mô Tả</label>
-                            <textarea class="form-control" rows="3"></textarea>
+                            <textarea v-model="create_phim.mo_ta" class="form-control" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -146,7 +140,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Đóng
                     </button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="themNhanVien()">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="themPhim()">
                         Thêm mới
                     </button>
                 </div>
@@ -166,39 +160,39 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Tên Phim</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="edit_phim.ten_phim" type="text" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Hình Ảnh</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="edit_phim.hinh_anh" type="text" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Đạo Diễn</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="edit_phim.dao_dien" type="text" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Diễn Viên</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="edit_phim.dien_vien" type="text" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Ngày Phát Hành</label>
-                            <input type="date" class="form-control" />
+                            <input v-model="edit_phim.ngay_phat_hanh" type="date" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Thể Loại</label>
-                            <select class="form-control">
-                                <option value="1">Hành Động</option>
-                                <option value="2">Viễn Tưởng</option>
-                                <option value="3">Tình Cảm</option>
+                            <select v-model="edit_phim.id_the_loai" class="form-control">
+                                <template v-for="(item, index) in list_the_loai_phim" :key="index">
+                                    <option v-if="item.tinh_trang==1" :value="item.id">{{ item.ten_the_loai }}</option>
+                                </template>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Thời Lượng</label>
-                            <input type="number" class="form-control" />
+                            <input v-model="edit_phim.thoi_luong" type="number" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Trạng Thái</label>
-                            <select class="form-control">
+                            <select v-model="edit_phim.tinh_trang" class="form-control">
                                 <option value="0">Ngừng Chiếu</option>
                                 <option value="1">Sắp Chiếu</option>
                                 <option value="2">Đang Chiếu</option>
@@ -206,7 +200,7 @@
                         </div>
                         <div class="col-md-12 mb-3">
                             <label class="form-label">Mô Tả</label>
-                            <textarea class="form-control" rows="3"></textarea>
+                            <textarea v-model="edit_phim.mo_ta" class="form-control" rows="3"></textarea>
                         </div>
                     </div>
                 </div>
@@ -214,7 +208,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Đóng
                     </button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="capNhatPhim()">
                         Cập nhật
                     </button>
                 </div>
@@ -233,14 +227,14 @@
                 <div class="modal-body">
                     <div class="alert alert-danger" role="alert">
                         Bạn có chắc chắn muốn xóa phim
-                        <strong>Phim</strong>?
+                        <strong>{{ del_phim.ten_phim }}</strong>?
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Đóng
                     </button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" v-on:click="xoaNhanVien()">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" v-on:click="xoaPhim()">
                         Xác nhận
                     </button>
                 </div>
@@ -320,20 +314,86 @@ export default {
     data() {
         return {
             list_phim: [],
+            list_the_loai_phim: [],
             obj_phim_chi_tiet: {},
+            create_phim: {
+                ten_phim: '',
+                hinh_anh: '',
+                dao_dien: '',
+                dien_vien: '',
+                ngay_phat_hanh: '',
+                id_the_loai: '',
+                thoi_luong: '',
+                tinh_trang: 0,
+                mo_ta: ''
+            },
+            edit_phim: {},
+            del_phim: {}
         };
     },
     mounted() {
-        this.layDataPhim();
+        this.getPhim();
+        this.getTheLoaiPhim();
     },
     methods: {
-        layDataPhim() {
+        getTheLoaiPhim() {
             axios
-                .get('http://127.0.0.1:8000/api/admin/phim/get-data')
-                .then(response => {
-                    this.list_phim = response.data.data;
+                .get('http://127.0.0.1:8000/api/admin/the-loai-phim/get-data')
+                .then((res) => {
+                    this.list_the_loai_phim = res.data.data;
                 })
         },
+        getPhim() {
+            axios
+                .get('http://127.0.0.1:8000/api/admin/phim/get-data')
+                .then((res) => {
+                    this.list_phim = res.data.data;
+                })
+        },
+        themPhim() {
+            axios.post('http://127.0.0.1:8000/api/admin/phim/add-data', this.create_phim)
+                .then((res) => {
+                    if (res.data.status) {
+                        alert(res.data.message);
+                        this.create_phim = {
+                            ten_phim: '',
+                            hinh_anh: '',
+                            dao_dien: '',
+                            dien_vien: '',
+                            ngay_phat_hanh: '',
+                            id_the_loai: '',
+                            thoi_luong: '',
+                            tinh_trang: 0,
+                            mo_ta: ''
+                        };
+                        this.getPhim();
+                    } else {
+                        alert('Thêm phim thất bại');
+                    }
+                });
+        },
+        capNhatPhim() {
+            axios.post('http://127.0.0.1:8000/api/admin/phim/update', this.edit_phim)
+                .then((res) => {
+                    if (res.data.status) {
+                        alert(res.data.message);
+                        this.getPhim();
+                    } else {
+                        alert('Cập nhật phim thất bại');
+                    }
+                });
+        },
+        xoaPhim() {
+            axios.post('http://127.0.0.1:8000/api/admin/phim/delete', this.del_phim)
+                .then((res) => {
+                    if (res.data.status) {
+                        alert(res.data.message);
+                        this.getPhim();
+                    } else {
+                        alert('Xóa phim thất bại');
+                    }
+                });
+        }
     },
 };
 </script>

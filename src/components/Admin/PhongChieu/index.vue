@@ -2,55 +2,62 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card radius-10 border-top border-0 border-3 border-info">
-                <div class="card-body">
-                    <span class="d-flex justify-content-between">
-                        <h5 class="card-title mt-2">Danh Sách Phòng Chiếu</h5>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#themModal">
-                            Thêm Phòng Chiếu
+                <div class="card-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0">DANH SÁCH PHÒNG CHIẾU</h4>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#themModal">Thêm Phòng Chiếu
                         </button>
-                    </span>
-                    <hr />
-                    <table class="table table-bordered table-hover">
-                        <thead class="text-center align-middle">
-                            <tr class="bg-primary text-light">
-                                <th class="align-middle text-center">#</th>
-                                <th class="align-middle text-center text-nowrap">
-                                    Tên Phòng Chiếu
-                                </th>
-                                <th class="align-middle text-center">Hàng Dọc</th>
-                                <th class="align-middle text-center">Hàng Ngang</th>
-                                <th class="align-middle text-center">Tình Trạng</th>
-                                <th class="align-middle text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="(item, index) in list_phong_chieu" :key="index">
-                                <td class="align-middle text-center">{{ index + 1 }}</td>
-                                <td class="align-middle text-center">{{ item.ten_phong }}</td>
-                                <td class="align-middle text-center">{{ item.hang_doc }}</td>
-                                <td class="align-middle text-center">{{ item.hang_ngang }}</td>
-                                <td v-on:click="doiTrangThaiPhongChieu(item)" class="text-center align-middle">
-                                    <button v-if="item.tinh_trang == 1" class="btn btn-success" type="button">
-                                        <i class="fa-solid fa-square-check"></i> Hoạt động
-                                    </button>
-                                    <button v-else class="btn btn-warning" type="button">
-                                        <i class="fa-solid fa-square-xmark"></i> Ngưng hoạt động
-                                    </button>
-                                </td>
-                                <td class="text-nowrap align-middle text-center">
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#capNhatModal"
-                                        v-on:click="Object.assign(update_phong_chieu, item)">
-                                        Cập Nhật
-                                    </button>
-                                    <button type="button" class="ms-2 btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#xoaModal" v-on:click="Object.assign(delete_phong_chieu, item)">
-                                        Xóa
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search....">
+                        <button class="btn btn-success input-group-text" style="width: 165px;">Tìm kiếm</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="text-center align-middle">
+                                <tr class="bg-primary text-light">
+                                    <th class="align-middle text-center">#</th>
+                                    <th class="align-middle text-center text-nowrap">
+                                        Tên Phòng Chiếu
+                                    </th>
+                                    <th class="align-middle text-center">Hàng Dọc</th>
+                                    <th class="align-middle text-center">Hàng Ngang</th>
+                                    <th class="align-middle text-center">Tình Trạng</th>
+                                    <th class="align-middle text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(item, index) in list_phong_chieu" :key="index">
+                                    <td class="align-middle text-center">{{ index + 1 }}</td>
+                                    <td class="align-middle text-center">{{ item.ten_phong }}</td>
+                                    <td class="align-middle text-center">{{ item.hang_doc }}</td>
+                                    <td class="align-middle text-center">{{ item.hang_ngang }}</td>
+                                    <td class="text-center align-middle text-nowrap" style="width: 150px;">
+                                        <button v-if="item.tinh_trang == 1" class="btn btn-success w-100" type="button">
+                                            <i class="fa-solid fa-square-check"></i> Hoạt động
+                                        </button>
+                                        <button v-else class="btn btn-warning w-100" type="button">
+                                            <i class="fa-solid fa-square-xmark"></i> Tạm ngưng
+                                        </button>
+                                    </td>
+                                    <td class="text-nowrap align-middle text-center" style="width: 150px;">
+                                        <button type="button" class="btn btn-info text-light" data-bs-toggle="modal"
+                                            data-bs-target="#capNhatModal"
+                                            v-on:click="Object.assign(update_phong_chieu, item)">
+                                            Cập Nhật
+                                        </button>
+                                        <button type="button" class="ms-2 btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#xoaModal" v-on:click="Object.assign(delete_phong_chieu, item)">
+                                            Xóa
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -245,17 +252,6 @@ export default {
                     }
                 });
         },
-        doiTrangThaiPhongChieu(item) {
-            axios.post('http://127.0.0.1:8000/api/admin/phong-chieu/change-status', item)
-                .then((res) => {
-                    if (res.data.status) {
-                        alert(res.data.message);
-                        this.getListPhongChieu();
-                    } else {
-                        alert('Cập nhật trạng thái phòng chiếu thất bại');
-                    }
-                });
-        }
     },
 };
 </script>

@@ -5,77 +5,71 @@
                 <div class="card-header d-flex justify-content-between">
                     <h4 class="mt-2"><b>DANH SÁCH KHÁCH HÀNG</b></h4>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                        Thêm khách hàng
+                        Thêm Khách Hàng
                     </button>
                 </div>
-                <div class="row mb-2 mt-2">
-                    <div class="col-lg-12">
-                        <div class="position-relative search-bar-box input-group" style="width: 100%;">
-                            <input type="text" class="form-control search-control" placeholder="Tìm Kiếm?">
-                            <span class="position-absolute top-50 search-show translate-middle-y"><i
-                                    class='bx bx-search'></i></span>
-                            <span class="position-absolute top-50 search-close translate-middle-y"><i
-                                    class='bx bx-x'></i></span>
-                            <button class="btn btn-primary">Tìm Kiếm</button>
-                        </div>
-                    </div>
-                </div>
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr class="bg-primary text-light text-nowrap">
-                                <th class="text-center">#</th>
-                                <th class="text-center">Họ Và Tên</th>
-                                <th class="text-center">Email</th>
-                                <th class="text-center">Số Điện Thoại</th>
-                                <th class="text-center">Ngày Sinh</th>
-                                <th class="text-center">Kich Hoạt</th>
-                                <th class="text-center">Tình Trạng</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template v-for="(item, index) in list_khach_hang" :key="index">
-                                <tr class="text-nowrap">
-                                    <th class="align-middle text-center">{{ index + 1 }}</th>
-                                    <td class="align-middle">{{ item.ho_va_ten }}</td>
-                                    <td class="align-middle">{{ item.email }}</td>
-                                    <td class="align-middle text-center">{{ item.so_dien_thoai }}</td>
-                                    <td class="align-middle text-center">{{ item.ngay_sinh }}</td>
-                                    <td class="align-middle text-center">
-
-                                        <button v-if="item.is_active == 1" class="btn btn-info w-100"
-                                            style="color: white;">
-                                            Đã Kích Hoạt
-                                        </button>
-                                        <button v-else class="btn btn-warning w-100" style="color: white;">
-                                            Chưa Kích Hoạt
-                                        </button>
-                                    </td>
-                                    <td class="align-middle text-center">
-
-                                        <button v-if="item.is_block == 1" class="btn btn-danger w-100"
-                                            style="color: white;">
-                                            Đã Khóa
-                                        </button>
-                                        <button v-else class="btn btn-success w-100" style="color: white;">
-                                            Chưa Khóa
-                                        </button>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <button class="btn btn-success me-2" data-bs-toggle="modal"
-                                            data-bs-target="#updateModal">
-                                            Cập nhật
-                                        </button>
-                                        <button class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal">
-                                            Xóa
-                                        </button>
-                                    </td>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search....">
+                        <button class="btn btn-success input-group-text" style="width: 155px;">Tìm kiếm</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="bg-primary text-light text-nowrap">
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Họ Và Tên</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Số Điện Thoại</th>
+                                    <th class="text-center">Ngày Sinh</th>
+                                    <th class="text-center">Kich Hoạt</th>
+                                    <th class="text-center">Tình Trạng</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
-                            </template>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <template v-for="(item, index) in list_khach_hang" :key="index">
+                                    <tr class="text-nowrap">
+                                        <th class="align-middle text-center">{{ index + 1 }}</th>
+                                        <td class="align-middle">{{ item.ho_va_ten }}</td>
+                                        <td class="align-middle">{{ item.email }}</td>
+                                        <td class="align-middle text-center">{{ item.so_dien_thoai }}</td>
+                                        <td class="align-middle text-center">{{ item.ngay_sinh }}</td>
+                                        <td class="align-middle text-center">
+    
+                                            <button v-if="item.is_active == 1" class="btn btn-warning text-light w-100"
+                                                style="color: white;">
+                                                Đã Kích Hoạt
+                                            </button>
+                                            <button v-else class="btn btn-secondary w-100" >
+                                                Chưa Kích Hoạt
+                                            </button>
+                                        </td>
+                                        <td class="align-middle text-center">
+    
+                                            <button v-if="item.is_block == 1" class="btn btn-danger w-100"
+                                                style="color: white;">
+                                                Đã Khóa
+                                            </button>
+                                            <button v-else class="btn btn-info w-100" style="color: white;">
+                                                Chưa Khóa
+                                            </button>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <button class="btn btn-success me-2" data-bs-toggle="modal"
+                                                data-bs-target="#updateModal">
+                                                Cập nhật
+                                            </button>
+                                            <button class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal">
+                                                Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

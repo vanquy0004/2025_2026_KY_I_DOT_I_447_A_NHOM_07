@@ -8,64 +8,58 @@
                         Thêm suất chiếu
                     </button>
                 </div>
-                <div class="row mb-2 mt-2">
-                    <div class="col-lg-12">
-                        <div class="position-relative search-bar-box input-group" style="width: 100%;">
-                            <input type="text" class="form-control search-control" placeholder="Tìm Kiếm?">
-                            <span class="position-absolute top-50 search-show translate-middle-y"><i
-                                    class='bx bx-search'></i></span>
-                            <span class="position-absolute top-50 search-close translate-middle-y"><i
-                                    class='bx bx-x'></i></span>
-                            <button class="btn btn-primary">Tìm Kiếm</button>
-                        </div>
-                    </div>
-                </div>
                 <div class="card-body table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr class="bg-primary text-light text-nowrap">
-                                <th class="text-center">#</th>
-                                <th class="text-center">Phim</th>
-                                <th class="text-center">Phòng Chiếu</th>
-                                <th class="text-center">Ngày Chiếu</th>
-                                <th class="text-center">Giờ Bắt Đầu</th>
-                                <th class="text-center">Giờ Kết Thúc</th>
-                                <th class="text-center">Tình Trạng</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template v-for="(item, index) in list_suat_chieu" :key="index">
-                                <tr class="text-nowrap">
-                                    <th class="align-middle text-center">{{ index + 1 }}</th>
-                                    <td class="align-middle">{{ item.ten_phim }}</td>
-                                    <td class="align-middle text-center">{{ item.ten_phong }}</td>
-                                    <td class="align-middle text-center">{{ item.ngay_chieu }}</td>
-                                    <td class="align-middle text-center">{{ item.thoi_gian_bat_dau }}</td>
-                                    <td class="align-middle text-center">{{ item.thoi_gian_ket_thuc }}</td>
-                                    <td v-on:click="doiTrangThaiSuatChieu(item)" class="align-middle text-center">
-                                        <button v-if="item.tinh_trang == 1" class="btn btn-success w-100"
-                                            style="color: white;">
-                                            Hoạt Động
-                                        </button>
-                                        <button v-else class="btn btn-danger w-100" style="color: white;">
-                                            Đã Hủy
-                                        </button>
-                                    </td>
-                                    <td class="align-middle text-center">
-                                        <button class="btn btn-success me-2" data-bs-toggle="modal"
-                                            data-bs-target="#updateModal" @click="edit_suat_chieu = item">
-                                            Cập nhật
-                                        </button>
-                                        <button class="btn btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal" @click="del_suat_chieu = item">
-                                            Xóa
-                                        </button>
-                                    </td>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search....">
+                        <button class="btn btn-success input-group-text" style="width: 150px;">Tìm kiếm</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="bg-primary text-light text-nowrap">
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Tên Phim</th>
+                                    <th class="text-center">Phòng Chiếu</th>
+                                    <th class="text-center">Ngày Chiếu</th>
+                                    <th class="text-center">Giờ Bắt Đầu</th>
+                                    <th class="text-center">Giờ Kết Thúc</th>
+                                    <th class="text-center">Tình Trạng</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
-                            </template>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <template v-for="(item, index) in list_suat_chieu" :key="index">
+                                    <tr class="text-nowrap">
+                                        <th class="align-middle text-center">{{ index + 1 }}</th>
+                                        <td class="align-middle">{{ item.ten_phim }}</td>
+                                        <td class="align-middle text-center">{{ item.ten_phong }}</td>
+                                        <td class="align-middle text-center">{{ item.ngay_chieu }}</td>
+                                        <td class="align-middle text-center">{{ item.thoi_gian_bat_dau }}</td>
+                                        <td class="align-middle text-center">{{ item.thoi_gian_ket_thuc }}</td>
+                                        <td v-on:click="doiTrangThaiSuatChieu(item)" class="align-middle text-center">
+                                            <button v-if="item.tinh_trang == 1" class="btn btn-success w-100"
+                                                style="color: white;">
+                                                Hoạt Động
+                                            </button>
+                                            <button v-else class="btn btn-danger w-100" style="color: white;">
+                                                Đã Hủy
+                                            </button>
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            <button class="btn btn-info text-light me-2" data-bs-toggle="modal"
+                                                data-bs-target="#updateModal" @click="edit_suat_chieu = item">
+                                                Cập nhật
+                                            </button>
+                                            <button class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal" @click="del_suat_chieu = item">
+                                                Xóa
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
