@@ -137,6 +137,16 @@
 						</a>
 					</li>
 				</router-link>
+				<router-link to="/admin/tin-tuc">
+					<li class="nav-item">
+						<a class="nav-link" href="/admin/tin-tuc">
+							<div class="parent-icon">
+								<i class="fa-solid fa-newspaper"></i>
+							</div>
+							<div class="menu-title">Tin Tức</div>
+						</a>
+					</li>
+				</router-link>
 			</ul>
 		</nav>
 	</div>

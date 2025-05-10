@@ -33,13 +33,13 @@
                                         <th class="align-middle text-center">{{ index + 1 }}</th>
                                         <td class="align-middle">{{ item.ten_phim }}</td>
                                         <td class="align-middle">
-                                            <img :src="item.hinh_anh" alt="Hình Ảnh"
-                                                style="width: 100px; height: 100px;">
+                                            <img :src="item.hinh_anh" alt="Hình Ảnh" class="img-fluid"
+                                                style="width: 100px; height: 100px; object-fit: cover;">
                                         </td>
                                         <td class="align-middle">{{ item.dao_dien }}</td>
                                         <td class="align-middle text-center">{{ item.ngay_phat_hanh }}</td>
                                         <td class="align-middle text-center">{{ item.ten_the_loai }}</td>
-                                        <td class="align-middle text-center" style="width: 140px;">
+                                        <td @click="doiTrangThai(item)" class="align-middle text-center" style="width: 140px;">
                                             <!-- Ví dụ: 1 = Sắp chiếu, 2 = Đang chiếu, 0 = Ngừng chiếu -->
                                             <button v-if="item.tinh_trang == 0" class="btn btn-danger w-100"
                                                 style="color: white;">
@@ -62,11 +62,13 @@
                                                 Chi Tiết
                                             </button>
                                             <button class="btn btn-info text-light me-2" data-bs-toggle="modal"
-                                                data-bs-target="#updateModal" v-on:click="Object.assign(edit_phim, item)">
+                                                data-bs-target="#updateModal"
+                                                v-on:click="Object.assign(edit_phim, item)">
                                                 Cập nhật
                                             </button>
                                             <button class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal" v-on:click="Object.assign(del_phim, item)">
+                                                data-bs-target="#deleteModal"
+                                                v-on:click="Object.assign(del_phim, item)">
                                                 Xóa
                                             </button>
                                         </td>
@@ -114,7 +116,7 @@
                             <label class="form-label">Thể Loại</label>
                             <select v-model="create_phim.id_the_loai" class="form-control">
                                 <template v-for="(item, index) in list_the_loai_phim" :key="index">
-                                    <option v-if="item.tinh_trang==1" :value="item.id">{{ item.ten_the_loai }}</option>
+                                    <option v-if="item.tinh_trang == 1" :value="item.id">{{ item.ten_the_loai }}</option>
                                 </template>
                             </select>
                         </div>
@@ -182,7 +184,7 @@
                             <label class="form-label">Thể Loại</label>
                             <select v-model="edit_phim.id_the_loai" class="form-control">
                                 <template v-for="(item, index) in list_the_loai_phim" :key="index">
-                                    <option v-if="item.tinh_trang==1" :value="item.id">{{ item.ten_the_loai }}</option>
+                                    <option v-if="item.tinh_trang == 1" :value="item.id">{{ item.ten_the_loai }}</option>
                                 </template>
                             </select>
                         </div>
@@ -391,6 +393,17 @@ export default {
                         this.getPhim();
                     } else {
                         alert('Xóa phim thất bại');
+                    }
+                });
+        },
+        doiTrangThai(value) {
+            axios.post('http://127.0.0.1:8000/api/admin/phim/change-status', value)
+                .then((res) => {
+                    if (res.data.status) {
+                        alert(res.data.message);
+                        this.getPhim();
+                    } else {
+                        alert('Thay đổi trạng thái thất bại');
                     }
                 });
         }

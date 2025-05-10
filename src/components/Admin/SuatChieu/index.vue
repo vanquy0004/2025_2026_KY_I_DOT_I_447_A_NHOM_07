@@ -86,7 +86,7 @@
                             <label class="form-label">Phòng Chiếu</label>
                             <select class="form-select" v-model="create_suat_chieu.id_phong_chieu">
                                 <option v-for="phong in list_phong" :key="phong.id" :value="phong.id">{{ phong.ten_phong
-                                    }}
+                                }}
                                 </option>
                             </select>
                         </div>
@@ -144,7 +144,7 @@
                             <label class="form-label">Phòng Chiếu</label>
                             <select class="form-select" v-model="edit_suat_chieu.id_phong_chieu">
                                 <option v-for="phong in list_phong" :key="phong.id" :value="phong.id">{{ phong.ten_phong
-                                    }}
+                                }}
                                 </option>
                             </select>
                         </div>
@@ -194,7 +194,7 @@
                     <div class="alert alert-danger" role="alert">
                         Bạn có chắc chắn muốn xóa suất chiếu phim
                         <strong>{{ del_suat_chieu.ten_phim }}</strong> vào ngày <strong>{{ del_suat_chieu.ngay_chieu
-                            }}</strong>?
+                        }}</strong>?
                     </div>
                 </div>
                 <div class="modal-footer">

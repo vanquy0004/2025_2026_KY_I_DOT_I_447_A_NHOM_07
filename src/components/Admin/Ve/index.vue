@@ -38,7 +38,7 @@
                                         item.thoi_gian_bat_dau }}</td>
                                     <td class="align-middle text-center">{{ item.ten_ghe }}</td>
                                     <td class="align-middle text-center">{{ item.ngay_chieu }}</td>
-                                    <td class="align-middle text-center">
+                                    <td @click="doiTrangThai(item)" class="align-middle text-center">
                                         <button v-if="item.tinh_trang == 0" class="btn btn-warning w-100"
                                             style="color: white;">
                                             Chưa Thanh Toán
@@ -319,6 +319,17 @@ export default {
                         alert(response.data.message);
                     }
                 })
+        },
+        doiTrangThai(value) {
+            axios.post('http://127.0.0.1:8000/api/admin/ve/change-status', value)
+                .then((res) => {
+                    if (res.data.status) {
+                        alert(res.data.message);
+                        this.layDataVe();
+                    } else {
+                        alert('Thay đổi trạng thái thất bại');
+                    }
+                });
         }
     },
 };

@@ -53,6 +53,10 @@ const routes = [
       path: '/admin/ghe',
       component: () => import('../components/Admin/Ghe/index.vue')
     },
+    {
+      path: '/admin/tin-tuc',
+      component: () => import('../components/Admin/TinTuc/index.vue')
+    },
    
 ]
 
