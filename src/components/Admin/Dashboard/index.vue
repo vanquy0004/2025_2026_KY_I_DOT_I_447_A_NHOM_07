@@ -1,13 +1,12 @@
 <template>
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
         <div class="col">
-            <div class="card radius-10 border-start border-0 border-3 border-info">
+            <div class="card radius-10 border-start  border-0  border-3 border-info">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="text-wrap">
                             <p class="mb-0 text-secondary">Tổng doanh thu</p>
                             <h4 class="my-1 text-info"> 1.500.000 VNĐ</h4>
-
                         </div>
                         <div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i
                                 class='bx bxs-wallet'></i>
@@ -22,7 +21,7 @@
                     <div class="d-flex align-items-center">
                         <div class=" text-wrap">
                             <p class="mb-0 text-secondary">Tổng Phim</p>
-                            <h4 class="my-1 text-danger"> 21  </h4>
+                            <h4 class="my-1 text-danger"> 21 </h4>
 
                         </div>
                         <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i
@@ -56,7 +55,6 @@
                             <p class="mb-0 text-secondary" style="margin-right: 10;">Tổng Phòng Chiếu</p>
                             <h4 class="my-1 text-success" style="margin-right: 10;">10</h4>
                         </div>
-
                         <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i
                                 class='bx bx-building'></i>
                         </div>
@@ -74,7 +72,7 @@
                         <div class="col-lg-12">
                             <h4 class="mt-2"><b>ĐẶT VÉ GẦN ĐÂY</b></h4>
                             <p class="text-secondary">Có 120 lượt đặt vé trong 7 ngày qua.</p>
-                            
+
                             <div class="booking-item border rounded p-3 mb-2">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
@@ -87,7 +85,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="booking-item border rounded p-3 mb-2">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
@@ -100,7 +98,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="booking-item border rounded p-3 mb-2">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
@@ -118,7 +116,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-lg-4 d-flex">
             <div class="card radius-10 border-top border-0 border-3 border-success flex-fill">
                 <div class="card-body">
@@ -126,7 +124,7 @@
                         <div class="col-lg-12">
                             <h4 class="mt-2"><b>PHIM PHỔ BIẾN</b></h4>
                             <p class="text-secondary">Top phim bán chạy nhất tháng này.</p>
-                            
+
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <div class="d-flex align-items-center">
                                     <span class="me-3">1.</span>
@@ -139,7 +137,7 @@
                                     <span class="badge bg-primary">30 vé</span>
                                 </div>
                             </div>
-                            
+
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <div class="d-flex align-items-center">
                                     <span class="me-3">2.</span>
@@ -152,7 +150,7 @@
                                     <span class="badge bg-primary">25 vé</span>
                                 </div>
                             </div>
-                            
+
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <div class="d-flex align-items-center">
                                     <span class="me-3">3.</span>
@@ -165,7 +163,7 @@
                                     <span class="badge bg-primary">20 vé</span>
                                 </div>
                             </div>
-                            
+
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <div class="d-flex align-items-center">
                                     <span class="me-3">4.</span>
@@ -178,7 +176,7 @@
                                     <span class="badge bg-primary">15 vé</span>
                                 </div>
                             </div>
-                            
+
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
                                     <span class="me-3">5.</span>
@@ -197,8 +195,6 @@
             </div>
         </div>
     </div>
-
-
 </template>
 <script>
 </script>

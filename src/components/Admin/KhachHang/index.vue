@@ -36,17 +36,15 @@
                                         <td class="align-middle text-center">{{ item.so_dien_thoai }}</td>
                                         <td class="align-middle text-center">{{ item.ngay_sinh }}</td>
                                         <td class="align-middle text-center">
-    
                                             <button v-if="item.is_active == 1" class="btn btn-warning text-light w-100"
                                                 style="color: white;">
                                                 Đã Kích Hoạt
                                             </button>
-                                            <button v-else class="btn btn-secondary w-100" >
+                                            <button v-else class="btn btn-secondary w-100">
                                                 Chưa Kích Hoạt
                                             </button>
                                         </td>
-                                        <td class="align-middle text-center">
-    
+                                        <td @click="doiTrangThai(item)" class="align-middle text-center">
                                             <button v-if="item.is_block == 1" class="btn btn-danger w-100"
                                                 style="color: white;">
                                                 Đã Khóa
@@ -55,13 +53,13 @@
                                                 Chưa Khóa
                                             </button>
                                         </td>
-                                        <td class="align-middle text-center">
+                                        <td class="align-middle text-center" style="width: 200px;">
                                             <button class="btn btn-success me-2" data-bs-toggle="modal"
-                                                data-bs-target="#updateModal">
+                                                data-bs-target="#updateModal" @click="edit_khach_hang = item">
                                                 Cập nhật
                                             </button>
                                             <button class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal">
+                                                data-bs-target="#deleteModal" @click="del_khach_hang = item">
                                                 Xóa
                                             </button>
                                         </td>
@@ -87,39 +85,27 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Họ Và Tên</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="create_khach_hang.ho_va_ten" type="text" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" />
+                            <input v-model="create_khach_hang.email" type="email" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Mật Khẩu</label>
-                            <input type="password" class="form-control" />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Xác Nhận Mật Khẩu</label>
-                            <input type="password" class="form-control" />
+                            <input v-model="create_khach_hang.password" type="password" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Số Điện Thoại</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="create_khach_hang.so_dien_thoai" type="text" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Ngày Sinh</label>
-                            <input type="date" class="form-control" />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Địa Chỉ</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="create_khach_hang.ngay_sinh" type="date" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">CCCD</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Ngày Sinh</label>
-                            <input type="date" class="form-control" />
+                            <input v-model="create_khach_hang.cccd" type="text" class="form-control" />
                         </div>
                     </div>
                 </div>
@@ -147,39 +133,27 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Họ Và Tên</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="edit_khach_hang.ho_va_ten" type="text" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" />
+                            <input v-model="edit_khach_hang.email" type="email" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Mật Khẩu</label>
-                            <input type="password" class="form-control" />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Xác Nhận Mật Khẩu</label>
-                            <input type="password" class="form-control" />
+                            <input v-model="edit_khach_hang.password" type="password" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Số Điện Thoại</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="edit_khach_hang.so_dien_thoai" type="text" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Ngày Sinh</label>
-                            <input type="date" class="form-control" />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Địa Chỉ</label>
-                            <input type="text" class="form-control" />
+                            <input v-model="edit_khach_hang.ngay_sinh" type="date" class="form-control" />
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">CCCD</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            <label class="form-label">Ngày Sinh</label>
-                            <input type="date" class="form-control" />
+                            <input v-model="edit_khach_hang.cccd" type="text" class="form-control" />
                         </div>
                     </div>
                 </div>
@@ -187,7 +161,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Đóng
                     </button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" @click="capNhatKhachHang()">
                         Cập nhật
                     </button>
                 </div>
@@ -206,14 +180,14 @@
                 <div class="modal-body">
                     <div class="alert alert-danger" role="alert">
                         Bạn có chắc chắn muốn xóa khách hàng
-                        <strong>Nguyễn Văn A</strong>?
+                        <strong>{{ del_khach_hang.ho_va_ten }}</strong>?
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Đóng
                     </button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" v-on:click="xoaNhanVien()">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" v-on:click="xoaKhachHang()">
                         Xác nhận
                     </button>
                 </div>
@@ -228,20 +202,8 @@ export default {
     data() {
         return {
             list_khach_hang: [],
-            create_khach_hang: {
-                ho_va_ten: '',
-                email: '',
-                so_dien_thoai: '',
-                password: '',
-                ngay_sinh: '',
-            },
-            edit_khach_hang: {
-                ho_va_ten: '',
-                email: '',
-                so_dien_thoai: '',
-                password: '',
-                ngay_sinh: '',
-            },
+            create_khach_hang: {},
+            edit_khach_hang: {},
             del_khach_hang: {},
         };
     },
@@ -256,6 +218,55 @@ export default {
                     this.list_khach_hang = response.data.data;
                 })
         },
+        themNhanVien() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/khach-hang/add-data', this.create_khach_hang)
+                .then(response => {
+                    if (response.data.status) {
+                        this.layDataKhachHang();
+                        this.create_khach_hang = {};
+                        this.$toast.success(response.data.message);
+                    } else {
+                        this.$toast.error(response.data.message);
+                    }
+                })
+        },
+        capNhatKhachHang() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/khach-hang/update', this.edit_khach_hang)
+                .then(response => {
+                    if (response.data.status) {
+                        this.layDataKhachHang();
+                        this.$toast.success(response.data.message);
+                    } else {
+                        this.$toast.error(response.data.message);
+                    }
+                })
+        },
+        xoaKhachHang() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/khach-hang/delete', this.del_khach_hang)
+                .then(response => {
+                    if (response.data.status) {
+                        this.layDataKhachHang();
+                        this.$toast.success(response.data.message);
+                    } else {
+                        this.$toast.error(response.data.message);
+                    }
+                })
+        },
+        doiTrangThai(payload) {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/khach-hang/change-status', payload)
+                .then(response => {
+                    if (response.data.status) {
+                        this.layDataKhachHang();
+                        this.$toast.success(response.data.message);
+                    } else {
+                        this.$toast.error(response.data.message);
+                    }
+                })
+        }
     },
 };
 </script>

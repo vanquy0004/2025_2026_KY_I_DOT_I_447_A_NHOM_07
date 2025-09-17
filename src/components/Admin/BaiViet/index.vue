@@ -3,9 +3,9 @@
         <div class="col-lg-12">
             <div class="card radius-10 border-top border-0 border-3 border-info">
                 <div class="card-header d-flex justify-content-between">
-                    <h4 class="mt-2">DANH SÁCH TIN TỨC</h4>
+                    <h4 class="mt-2">DANH SÁCH BÀI VIẾT</h4>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
-                        Thêm tin tức
+                        Thêm bài viết
                     </button>
                 </div>
                 <div class="card-body table-responsive">
@@ -19,33 +19,32 @@
                                 <tr class="bg-primary text-light text-nowrap">
                                     <th class="text-center">#</th>
                                     <th class="text-center">Tiêu Đề</th>
+                                    <th class="text-center">Mô tả ngắn</th>
                                     <th class="text-center">Nội Dung</th>
                                     <th class="text-center">Hình Ảnh</th>
-                                    <th class="text-center">Tin Nổi Bật</th>
+                                    <th class="text-center">Tag</th>
                                     <th class="text-center">Trạng Thái</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <template v-for="(item, index) in list_tin_tuc" :key="index">
+                                <template v-for="(item, index) in list_bai_viet" :key="index">
                                     <tr class="">
                                         <th class="align-middle text-center">{{ index + 1 }}</th>
                                         <td class="align-middle text-wrap">{{ item.tieu_de }}</td>
+                                        <td class="align-middle text-wrap">{{ item.mo_ta_ngan }}</td>
                                         <td class="align-middle text-center" style="width: 100px;">
                                             <i class="fa-solid fa-circle-info fa-2x" data-bs-toggle="modal"
                                                 data-bs-target="#chiTietModal"
-                                                v-on:click="Object.assign(chi_tiet_tin_tuc, item)"></i>
+                                                v-on:click="Object.assign(chi_tiet_bai_viet, item)"></i>
                                         </td>
                                         <td class="align-middle text-center text-nowrap" style="width: 250px;">
                                             <img :src="item.hinh_anh" alt="Hình Ảnh" class="img-fluid rounded"
                                                 style="height: 100px; object-fit: cover; width: 100%;">
                                         </td>
-                                        <td class="align-middle text-center text-nowrap" style="width: 100px;">
-                                            <i v-if="item.is_noi_bat == 1"
-                                                class="fa-solid fa-fire fa-2x text-danger"></i>
-                                            <i v-else class="fa-solid fa-file fa-2x text-secondary"></i>
-                                        </td>
-                                        <td @click="doiTrangThai(item)" class="align-middle text-center text-nowrap" style="width: 140px;">
+                                        <td class="align-middle text-wrap">{{ item.tag }}</td>
+                                        <td @click="doiTrangThai(item)" class="align-middle text-center text-nowrap"
+                                            style="width: 100px;">
                                             <button v-if="item.tinh_trang == 1" class="btn btn-success w-100"
                                                 style="color: white;">
                                                 Hiển Thị
@@ -57,12 +56,12 @@
                                         <td class="align-middle text-center text-nowrap" style="width: 150px;">
                                             <button class="btn btn-info text-light me-2" data-bs-toggle="modal"
                                                 data-bs-target="#updateModal"
-                                                v-on:click="Object.assign(edit_tin_tuc, item)">
+                                                v-on:click="Object.assign(edit_bai_viet, item)">
                                                 Cập nhật
                                             </button>
                                             <button class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal"
-                                                v-on:click="Object.assign(del_tin_tuc, item)">
+                                                v-on:click="Object.assign(del_bai_viet, item)">
                                                 Xóa Bỏ
                                             </button>
                                         </td>
@@ -82,38 +81,39 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Thêm Tin Tức Mới</h5>
+                    <h5 class="modal-title">Thêm Bài Viết Mới</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-2">
                         <label>Tiêu Đề</label>
-                        <input v-model="create_tin_tuc.tieu_de" type="text" class="form-control mt-1" />
+                        <input v-model="create_bai_viet.tieu_de" type="text" class="form-control mt-1" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Mô tả ngắn</label>
+                        <textarea v-model="create_bai_viet.mo_ta_ngan" class="form-control mt-1" rows="1"></textarea>
                     </div>
                     <div class="mb-2">
                         <label>Nội Dung</label>
-                        <textarea v-model="create_tin_tuc.noi_dung" class="form-control mt-1" rows="3"></textarea>
+                        <textarea v-model="create_bai_viet.noi_dung" class="form-control mt-1" rows="3"></textarea>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label>Hình Ảnh</label>
-                                <input v-model="create_tin_tuc.hinh_anh" type="text" class="form-control mt-1" />
+                                <input v-model="create_bai_viet.hinh_anh" type="text" class="form-control mt-1" />
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="mb-2">
-                                <label>Tin Nổi Bật</label>
-                                <select class="form-select mt-1" v-model="create_tin_tuc.is_noi_bat">
-                                    <option value="0">Không</option>
-                                    <option value="1">Có</option>
-                                </select>
+                                <label>Tag</label>
+                                <input v-model="create_bai_viet.tag" type="text" class="form-control mt-1" />
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="mb-2">
                                 <label>Trạng Thái</label>
-                                <select class="form-select mt-1" v-model="create_tin_tuc.tinh_trang">
+                                <select class="form-select mt-1" v-model="create_bai_viet.tinh_trang">
                                     <option value="0">Tạm Tắt</option>
                                     <option value="1">Hiển Thị</option>
                                 </select>
@@ -125,7 +125,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Đóng
                     </button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="themTinTuc()">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" v-on:click="themBaiViet()">
                         Thêm mới
                     </button>
                 </div>
@@ -138,38 +138,39 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Cập Nhật Thông Tin Phim</h5>
+                    <h5 class="modal-title">Cập Nhật Bài Viết</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-2">
                         <label>Tiêu Đề</label>
-                        <input v-model="edit_tin_tuc.tieu_de" type="text" class="form-control mt-1" />
+                        <input v-model="edit_bai_viet.tieu_de" type="text" class="form-control mt-1" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Mô tả ngắn</label>
+                        <textarea v-model="edit_bai_viet.mo_ta_ngan" class="form-control mt-1" rows="1"></textarea>
                     </div>
                     <div class="mb-2">
                         <label>Nội Dung</label>
-                        <textarea v-model="edit_tin_tuc.noi_dung" class="form-control mt-1" rows="3"></textarea>
+                        <textarea v-model="edit_bai_viet.noi_dung" class="form-control mt-1" rows="3"></textarea>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label>Hình Ảnh</label>
-                                <input v-model="edit_tin_tuc.hinh_anh" type="text" class="form-control mt-1" />
+                                <input v-model="edit_bai_viet.hinh_anh" type="text" class="form-control mt-1" />
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="mb-2">
-                                <label>Tin Nổi Bật</label>
-                                <select class="form-select mt-1" v-model="edit_tin_tuc.is_noi_bat">
-                                    <option value="0">Không</option>
-                                    <option value="1">Có</option>
-                                </select>
+                                <label>Tag</label>
+                                <input v-model="edit_bai_viet.tag" type="text" class="form-control mt-1" />
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="mb-2">
                                 <label>Trạng Thái</label>
-                                <select class="form-select mt-1" v-model="edit_tin_tuc.tinh_trang">
+                                <select class="form-select mt-1" v-model="edit_bai_viet.tinh_trang">
                                     <option value="0">Tạm Tắt</option>
                                     <option value="1">Hiển Thị</option>
                                 </select>
@@ -181,7 +182,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Đóng
                     </button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="capNhatTinTuc()">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="capNhatBaiViet()">
                         Cập nhật
                     </button>
                 </div>
@@ -194,7 +195,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Xóa Tin Tức</h5>
+                    <h5 class="modal-title">Xóa Bài Viết</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -203,8 +204,8 @@
                             <div class="font-35 text-dark"><i class="bx bx-info-circle"></i>
                             </div>
                             <div class="ms-3">
-                                <h6 class="mb-0 text-dark">Bạn có chắc chắn muốn xóa tin
-                                    <b> {{ del_tin_tuc.tieu_de }} </b>
+                                <h6 class="mb-0 text-dark">Bạn có chắc chắn muốn xóa bài viết
+                                    <b> {{ del_bai_viet.tieu_de }} </b>
                                     này không?
                                 </h6>
                                 <div class="text-dark"><b>Lưu ý: </b>Điều này không thể hoàn tác khi nhấn xác nhận</div>
@@ -216,7 +217,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Hủy Bỏ
                     </button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" v-on:click="xoaTinTuc()">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" v-on:click="xoaBaiViet()">
                         Xác nhận
                     </button>
                 </div>
@@ -228,43 +229,13 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Chi Tiết Nội Dung Tin</h5>
+                    <h5 class="modal-title">Chi Tiết Nội Dung Bài Viết</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12 text-center mb-3">
-                            <img :src="chi_tiet_tin_tuc.hinh_anh" alt="Hình Ảnh" class="img-fluid rounded"
-                                style="max-height: 300px;">
-                        </div>
-                        <div class="col-lg-11 mx-auto">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="text-warning ">
-                                        <i v-if="chi_tiet_tin_tuc.is_noi_bat == 1"
-                                            class="fa-solid fa-fire text-danger"></i>
-                                        <i v-else class="fa-solid fa-file text-secondary"></i>
-                                        {{ chi_tiet_tin_tuc.tieu_de }}
-                                    </h4>
-                                    <p class="mb-0">
-                                        <i class="fa-solid fa-calendar-days ms-1 me-2"></i>
-                                        {{ extractDateTime(chi_tiet_tin_tuc.created_at).day }} -
-                                        {{ extractDateTime(chi_tiet_tin_tuc.created_at).time }}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="">
-                                        Nội Dung
-                                    </h4>
-                                    <p class="mb-0">
-                                        {{ chi_tiet_tin_tuc.noi_dung }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="mb-0">
+                        {{ chi_tiet_bai_viet.noi_dung }}
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -280,21 +251,15 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            list_tin_tuc: [],
-            create_tin_tuc: {
-                tieu_de: '',
-                hinh_anh: '',
-                noi_dung: '',
-                is_noi_bat: 0,
-                tinh_trang: 1,
-            },
-            edit_tin_tuc: {},
-            del_tin_tuc: {},
-            chi_tiet_tin_tuc: {},
+            list_bai_viet: [],
+            create_bai_viet: {},
+            edit_bai_viet: {},
+            del_bai_viet: {},
+            chi_tiet_bai_viet: {},
         }
     },
     mounted() {
-        this.getListTinTuc();
+        this.getBaiViet();
     },
     methods: {
         extractDateTime(isoString) {
@@ -303,60 +268,54 @@ export default {
             const day = date.toLocaleDateString('vi-VN');
             return { time, day };
         },
-        getListTinTuc() {
-            axios.get('http://127.0.0.1:8000/api/admin/tin-tuc/get-data')
+        getBaiViet() {
+            axios.get('http://127.0.0.1:8000/api/admin/bai-viet/get-data')
                 .then((res) => {
-                    this.list_tin_tuc = res.data.data;
+                    this.list_bai_viet = res.data.data;
                 })
         },
-        themTinTuc() {
-            axios.post('http://127.0.0.1:8000/api/admin/tin-tuc/add-data', this.create_tin_tuc)
+        themBaiViet() {
+            axios.post('http://127.0.0.1:8000/api/admin/bai-viet/add-data', this.create_bai_viet)
                 .then((res) => {
                     if (res.data.status) {
-                        alert(res.data.message);
-                        this.create_tin_tuc = {
-                            tieu_de: '',
-                            hinh_anh: '',
-                            noi_dung: '',
-                            is_noi_bat: 0,
-                            tinh_trang: 1,
-                        }
-                        this.getListTinTuc();
+                        this.$toast.success(res.data.message);
+                        this.create_bai_viet = {}
+                        this.getBaiViet();
                     } else {
-                        alert('Thêm tin thất bại');
+                        this.$toast.error('Thêm bài viết thất bại');
                     }
                 });
         },
-        capNhatTinTuc() {
-            axios.post('http://127.0.0.1:8000/api/admin/tin-tuc/update', this.edit_tin_tuc)
+        capNhatBaiViet() {
+            axios.post('http://127.0.0.1:8000/api/admin/bai-viet/update', this.edit_bai_viet)
                 .then((res) => {
                     if (res.data.status) {
-                        alert(res.data.message);
-                        this.getListTinTuc();
+                        this.$toast.success(res.data.message);
+                        this.getBaiViet();
                     } else {
-                        alert('Cập nhật tin thất bại');
+                        this.$toast.error('Cập nhật bài viết thất bại');
                     }
                 });
         },
-        xoaTinTuc() {
-            axios.post('http://127.0.0.1:8000/api/admin/tin-tuc/delete', this.del_tin_tuc)
+        xoaBaiViet() {
+            axios.post('http://127.0.0.1:8000/api/admin/bai-viet/delete', this.del_bai_viet)
                 .then((res) => {
                     if (res.data.status) {
-                        alert(res.data.message);
-                        this.getListTinTuc();
+                        this.$toast.success(res.data.message);
+                        this.getBaiViet();
                     } else {
-                        alert('Xóa tin thất bại');
+                        this.$toast.error('Xóa bài viết thất bại');
                     }
                 });
         },
         doiTrangThai(value) {
-            axios.post('http://127.0.0.1:8000/api/admin/tin-tuc/change-status', value)
+            axios.post('http://127.0.0.1:8000/api/admin/bai-viet/change-status', value)
                 .then((res) => {
                     if (res.data.status) {
-                        alert(res.data.message);
-                        this.getListTinTuc();
+                        this.$toast.success(res.data.message);
+                        this.getBaiViet();
                     } else {
-                        alert('Thay đổi trạng thái thất bại');
+                        this.$toast.error('Thay đổi trạng thái thất bại');
                     }
                 });
         }

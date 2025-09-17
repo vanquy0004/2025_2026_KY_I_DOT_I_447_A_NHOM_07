@@ -38,7 +38,7 @@
                                         <td class="align-middle">{{ item.dia_chi }}</td>
                                         <td class="align-middle text-center">{{ item.ngay_sinh }}</td>
                                         <td class="align-middle">{{ item.ten_chuc_vu }}</td>
-                                        <td class="align-middle text-center">
+                                        <td @click="doiTrangThai(item)" class="align-middle text-center">
                                             <button v-if="item.tinh_trang == 1" class="btn btn-info w-100"
                                                 style="color: white;">
                                                 Hoạt động
@@ -268,21 +268,11 @@ export default {
             axios.post('http://127.0.0.1:8000/api/admin/nhan-vien/add-data', this.create_nhan_vien)
                 .then((res) => {
                     if (res.data.status) {
-                        alert(res.data.message);
-                        this.create_nhan_vien = {
-                            ho_va_ten: "",
-                            email: "",
-                            password: "",
-                            re_password: "",
-                            so_dien_thoai: "",
-                            dia_chi: "",
-                            ngay_sinh: "",
-                            tinh_trang: 1,
-                            id_chuc_vu: "",
-                        };
+                        this.$toast.success(res.data.message);
+                        this.create_nhan_vien = {};
                         this.getNhanVien();
                     } else {
-                        alert('Thêm mới nhân viên thất bại');
+                        this.$toast.error('Thêm mới nhân viên thất bại');
                     }
                 });
         },
@@ -290,10 +280,10 @@ export default {
             axios.post('http://127.0.0.1:8000/api/admin/nhan-vien/update', this.edit_nhan_vien)
                 .then((res) => {
                     if (res.data.status) {
-                        alert(res.data.message);
+                        this.$toast.success(res.data.message);
                         this.getNhanVien();
                     } else {
-                        alert('Cập nhật thông tin thất bại');
+                        this.$toast.error('Cập nhật thông tin thất bại');
                     }
                 });
         },
@@ -301,13 +291,20 @@ export default {
             axios.post('http://127.0.0.1:8000/api/admin/nhan-vien/delete', this.del_nhan_vien)
                 .then((res) => {
                     if (res.data.status) {
-                        alert(res.data.message);
+                        this.$toast.success(res.data.message);
                         this.getNhanVien();
-                    } else {
-                        alert('Xóa nhân viên thất bại');
                     }
                 });
         },
+        doiTrangThai(payload) {
+            axios.post('http://127.0.0.1:8000/api/admin/nhan-vien/change-status', payload)
+                .then((res) => {
+                    if (res.data.status) {
+                        this.$toast.success(res.data.message);
+                        this.getNhanVien();
+                    }
+                });
+        }
 
     },
 };
